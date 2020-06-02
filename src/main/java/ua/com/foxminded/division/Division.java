@@ -38,37 +38,37 @@ public class Division {
 
 		String[] dividendSplitNumber = String.valueOf(dividend).split(""); 
 		List<String[]> intermediateResultList = new ArrayList<String[]>();
-		String resultOfDivision = "";
+		StringJoiner resultOfDivision = new StringJoiner("");
 		int remainderOfdivision = 0; // остаток от деления remainder of the division
 		boolean isNeedNextNumeral = false;
-		String currentNumerals = "";
+		StringJoiner currentNumerals = new StringJoiner("");
 		
 		for (int i = 0; i < dividendSplitNumber.length; i++) {
 			String currentNumeral = dividendSplitNumber[i]; 
 			
 			if (isNeedNextNumeral) {		
-				currentNumerals = currentNumerals + currentNumeral;
+				currentNumerals.add(currentNumeral) ;
 			} else if (remainderOfdivision != 0){
-				currentNumerals = String.valueOf(remainderOfdivision) + currentNumeral;
+				currentNumerals.add(String.valueOf(remainderOfdivision) + currentNumeral);
 			}else {
-				currentNumerals = currentNumeral;
+				currentNumerals.add(currentNumeral);
 			}
 			
-			Integer currentNumber = Integer.parseInt(currentNumerals); 
+			Integer currentNumber = Integer.parseInt(currentNumerals.toString()); 
 			
 			if (currentNumber >= divider) {
 				isNeedNextNumeral = false;	
 				int currentQuotient = currentNumber / divider;
 				int multiplicationCurrentQuotientUndDivider = currentQuotient * divider;
-				resultOfDivision = resultOfDivision + String.valueOf(currentQuotient);
-				String[] currentValueForQuotientUndDivider = { currentNumerals, String.valueOf(multiplicationCurrentQuotientUndDivider) };
+				resultOfDivision.add(String.valueOf(currentQuotient));
+				String[] currentValueForQuotientUndDivider = { currentNumerals.toString(), String.valueOf(multiplicationCurrentQuotientUndDivider) };
 				intermediateResultList.add(currentValueForQuotientUndDivider);
 				remainderOfdivision = currentNumber - multiplicationCurrentQuotientUndDivider;
-				currentNumerals = "";	
+				currentNumerals = new StringJoiner("");	
 			} else {	
 				isNeedNextNumeral = true;
-				if (!resultOfDivision.isEmpty() ) {
-					resultOfDivision = resultOfDivision + 0;
+				if (!resultOfDivision.toString().isEmpty()){
+					resultOfDivision.add("0");
 				}
 			}	
 		}
