@@ -16,8 +16,13 @@ public class Division {
 
 		if (divider == 0) {
             throw new IllegalArgumentException("Error! Сannot be divided by zero");
-        }
-		
+        }	
+		if (dividend == 0) {
+			
+			OutputDivisionToConsole outputDivisionToConsole = new OutputDivisionToConsole(String.valueOf(divider));	
+			outputDivisionToConsole.drawColumnDivisionToConsoleWhenDividendZerro();
+			return;
+		}		
 		Map<String, Object> outputparametersColumnDivision = this.getValueforOutputColumnDivisionToConsole(dividend,
 				divider);
 		OutputDivisionToConsole outputDivisionToConsole = new OutputDivisionToConsole(outputparametersColumnDivision);
@@ -31,18 +36,15 @@ public class Division {
 		outputparametersColumnDivision.put("dividend", dividend);
 		outputparametersColumnDivision.put("divider", divider);
 
-		String[] dividendSplitNumber = String.valueOf(dividend).split(""); // разделение на цифры делимого
-		List<String[]> arrayOfValue = new ArrayList<String[]>();
+		String[] dividendSplitNumber = String.valueOf(dividend).split(""); 
+		List<String[]> intermediateResultList = new ArrayList<String[]>();
 		String resultOfDivision = "";
-
 		int remainderOfdivision = 0; // остаток от деления remainder of the division
-
 		boolean isNeedNextNumeral = false;
 		String currentNumerals = "";
 		
 		for (int i = 0; i < dividendSplitNumber.length; i++) {
-			
-			String currentNumeral = dividendSplitNumber[i]; // текущие цифры
+			String currentNumeral = dividendSplitNumber[i]; 
 			
 			if (isNeedNextNumeral) {		
 				currentNumerals = currentNumerals + currentNumeral;
@@ -52,46 +54,29 @@ public class Division {
 				currentNumerals = currentNumeral;
 			}
 			
-			Integer currentNumber = Integer.parseInt(currentNumerals); // текущие цифры
+			Integer currentNumber = Integer.parseInt(currentNumerals); 
 			
-			System.out.println(i);
-			System.out.println("currentNumeral                            " + currentNumber);
 			if (currentNumber >= divider) {
-
-				isNeedNextNumeral = false;
-				
+				isNeedNextNumeral = false;	
 				int currentQuotient = currentNumber / divider;
-
 				int multiplicationCurrentQuotientUndDivider = currentQuotient * divider;
-
 				resultOfDivision = resultOfDivision + String.valueOf(currentQuotient);
-
 				String[] currentValueForQuotientUndDivider = { currentNumerals, String.valueOf(multiplicationCurrentQuotientUndDivider) };
-
-				System.out
-						.println("multiplicationCurrentQuotientUndDivider  " + multiplicationCurrentQuotientUndDivider);
-				arrayOfValue.add(currentValueForQuotientUndDivider);
-
+				intermediateResultList.add(currentValueForQuotientUndDivider);
 				remainderOfdivision = currentNumber - multiplicationCurrentQuotientUndDivider;
-
-				currentNumerals = "";
-				
+				currentNumerals = "";	
 			} else {	
 				isNeedNextNumeral = true;
-				if (resultOfDivision !="" ) {
+				if (!resultOfDivision.isEmpty() ) {
 					resultOfDivision = resultOfDivision + 0;
 				}
 			}	
 		}
-
-		outputparametersColumnDivision.put("arrayOfValue", arrayOfValue);
+		outputparametersColumnDivision.put("arrayOfValue", intermediateResultList);
 		outputparametersColumnDivision.put("resultOfDivision", resultOfDivision);
 		outputparametersColumnDivision.put("remainderOfdivision", remainderOfdivision);
 
-		System.out.println(" remainderOfdivision " + remainderOfdivision);
-		System.out.println(" resultOfDivision  " + resultOfDivision);
 		return outputparametersColumnDivision;
 	}
-
 }
 
