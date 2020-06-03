@@ -39,7 +39,7 @@ public class Division {
 		parametersColumnDivision.put("divider", divider);
 
 		String[] dividendSplitNumber = String.valueOf(dividend).split(""); 
-		List<String[]> intermediateResultDivisionList = new ArrayList<String[]>();
+		List<String[]> intermediateResultDivisionList = new ArrayList<>();
 		StringJoiner quotient = new StringJoiner("");
 		int remainder = 0; 
 		boolean isNeedNextNumeral = false;
