@@ -12,21 +12,24 @@ public class Division {
 		divideColumn(Math.abs(dividend), Math.abs(divider));
 	}
 
-	public void divideColumn(final int dividend, final int divider) {
+	public String divideColumn(final int dividend, final int divider) {
 
+		String	aa = "";
 		if (divider == 0) {
             throw new IllegalArgumentException("Error! Сannot be divided by zero");
         }	
 		if (dividend == 0) {
 			
 			OutputDivisionToConsole outputDivisionToConsole = new OutputDivisionToConsole(String.valueOf(divider));	
-			outputDivisionToConsole.drawColumnDivisionToConsoleWhenDividendZerro();
-			return;
+		     aa = outputDivisionToConsole.drawColumnDivisionToConsoleWhenDividendZerro();
+			 return aa;
 		}		
 		Map<String, Object> outputparametersColumnDivision = this.getValueforOutputColumnDivisionToConsole(dividend,
 				divider);
 		OutputDivisionToConsole outputDivisionToConsole = new OutputDivisionToConsole(outputparametersColumnDivision);
-		outputDivisionToConsole.drawColumnDivisionToConsole();
+		aa = outputDivisionToConsole.drawColumnDivisionToConsole();
+		
+		return aa;
 	}
 
 	private Map<String, Object> getValueforOutputColumnDivisionToConsole(final int dividend, final int divider) { 
