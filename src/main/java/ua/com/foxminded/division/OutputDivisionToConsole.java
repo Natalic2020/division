@@ -14,10 +14,10 @@ public class OutputDivisionToConsole {
 	private int currentPositionNumber = 3;
 	private String dividend ;
 	private String divider ;
-	private List<String[]> intermediateResultList ;
-	private String resultOfDivision  ;
-	private String remainderOfdivision ;
-	private int shiftFirstNumeral = 0;
+	private List<String[]> intermediateResultDivisionList ;
+	private String quotient  ;
+	private String remainder ;
+	private int shiftFirstDigit = 0;
 	private StringJoiner outputDivisionJoiner = new StringJoiner(""); 
 	
 	
@@ -25,13 +25,13 @@ public class OutputDivisionToConsole {
 		this.divider = divider;
 	}
 
-	public OutputDivisionToConsole(Map<String, Object> outputparametersColumnDivision) {
-		dividend = outputparametersColumnDivision.get("dividend").toString();
-		divider = outputparametersColumnDivision.get("divider").toString();
-		intermediateResultList = (List) outputparametersColumnDivision.get("arrayOfValue");
-		resultOfDivision = outputparametersColumnDivision.get("resultOfDivision").toString();
-		remainderOfdivision = outputparametersColumnDivision.get("remainderOfdivision").toString();
-		shiftFirstNumeral = intermediateResultList.get(0)[0].length() - intermediateResultList.get(0)[1].length();
+	public OutputDivisionToConsole(Map<String, Object> parametersColumnDivision) {
+		dividend = parametersColumnDivision.get("dividend").toString();
+		divider = parametersColumnDivision.get("divider").toString();
+		intermediateResultDivisionList = (List) parametersColumnDivision.get("arrayOfValue");
+		quotient = parametersColumnDivision.get("quotient").toString();
+		remainder = parametersColumnDivision.get("remainder").toString();
+		shiftFirstDigit = intermediateResultDivisionList.get(0)[0].length() - intermediateResultDivisionList.get(0)[1].length();
 	}
 	
 	public String drawColumnDivisionToConsoleWhenDividendZerro() {
@@ -56,17 +56,15 @@ public class OutputDivisionToConsole {
 	}
 	
 	public String drawColumnDivisionToConsole() {
-
 		drawHeader();
 		drawBody();
 		drawRemainder();
-		
 		return outputDivisionJoiner.toString();
 	}
 
 	private void drawHeader() {	
 		drawFirstLineHeader();
-		currentPositionNumber = currentPositionNumber + shiftFirstNumeral;
+		currentPositionNumber += shiftFirstDigit;
 		drawSecondLineHeader();
 		drawThirdLineHeader();
 	}
@@ -82,50 +80,50 @@ public class OutputDivisionToConsole {
 	
 	private void drawSecondLineHeader() {
 		outputWhitespace(currentPositionNumber);
-		outputDivisionJoiner.add(intermediateResultList.get(0)[1]);
-		outputWhitespace(dividend.length() - intermediateResultList.get(0)[1].length()-shiftFirstNumeral);
+		outputDivisionJoiner.add(intermediateResultDivisionList.get(0)[1]);
+		outputWhitespace(dividend.length() - intermediateResultDivisionList.get(0)[1].length()-shiftFirstDigit);
 		outputDivisionJoiner.add(VERTICAL_LINE);
-		drawLine(divider.length() > resultOfDivision.length() ? divider.length() : resultOfDivision.length());
+		drawLine(divider.length() > quotient.length() ? divider.length() : quotient.length());
 		outputDivisionJoiner.add("\n");
 	}
 	
 	private void drawThirdLineHeader() {
 		outputWhitespace(currentPositionNumber);
-		drawLine(String.valueOf(intermediateResultList.get(0)[1]).length());
-		outputWhitespace(dividend.length() - intermediateResultList.get(0)[1].length()-shiftFirstNumeral);
+		drawLine(String.valueOf(intermediateResultDivisionList.get(0)[1]).length());
+		outputWhitespace(dividend.length() - intermediateResultDivisionList.get(0)[1].length()-shiftFirstDigit);
 		outputDivisionJoiner.add(VERTICAL_LINE);
-		outputDivisionJoiner.add(resultOfDivision);
+		outputDivisionJoiner.add(quotient);
 		outputDivisionJoiner.add("\n");
 	}
 
 	private void drawBody() {
-		for (int i = 1; i < intermediateResultList.size(); i++) {
-			
-			if (Integer.parseInt(intermediateResultList.get(i)[0]) == Integer.parseInt(intermediateResultList.get(i)[1]) ) {
-				currentPositionNumber = currentPositionNumber + intermediateResultList.get(i)[1].length();
-			}else if (intermediateResultList.get(i-1)[1].length()  == intermediateResultList.get(i)[0].length() ) {
+		for (int i = 1; i < intermediateResultDivisionList.size(); i++) {
+	
+			if (Integer.parseInt(intermediateResultDivisionList.get(i)[0]) == Integer.parseInt(intermediateResultDivisionList.get(i)[1]) ) {
+				currentPositionNumber = currentPositionNumber + intermediateResultDivisionList.get(i)[1].length();
+			}else if (intermediateResultDivisionList.get(i-1)[1].length()  == intermediateResultDivisionList.get(i)[0].length() ) {
 				currentPositionNumber = currentPositionNumber + 1;
 			}	
 			outputWhitespace(currentPositionNumber - 1);
 			outputDivisionJoiner.add(UNDERLINE);
-			outputDivisionJoiner.add(intermediateResultList.get(i)[0]);
+			outputDivisionJoiner.add(intermediateResultDivisionList.get(i)[0]);
 			outputDivisionJoiner.add("\n");
-			int shiftNumeral = intermediateResultList.get(i)[0].length() - intermediateResultList.get(i)[1].length();
+			int shiftNumeral = intermediateResultDivisionList.get(i)[0].length() - intermediateResultDivisionList.get(i)[1].length();
 			currentPositionNumber = currentPositionNumber + shiftNumeral;
 			outputWhitespace(currentPositionNumber);
-			outputDivisionJoiner.add(intermediateResultList.get(i)[1]);
+			outputDivisionJoiner.add(intermediateResultDivisionList.get(i)[1]);
 			outputDivisionJoiner.add("\n");
 			outputWhitespace(currentPositionNumber);
-			int lenghtSubtrahend = intermediateResultList.get(i)[1].length();
+			int lenghtSubtrahend = intermediateResultDivisionList.get(i)[1].length();
 			drawLine(lenghtSubtrahend);
 			outputDivisionJoiner.add("\n");
 		}
 	}
 
 	private void drawRemainder() {
-		int shiftRemainder = intermediateResultList.get(intermediateResultList.size()-1)[1].length() - remainderOfdivision.length();
+		int shiftRemainder = intermediateResultDivisionList.get(intermediateResultDivisionList.size()-1)[1].length() - remainder.length();
 		outputWhitespace(currentPositionNumber + shiftRemainder);
-		outputDivisionJoiner.add(remainderOfdivision);
+		outputDivisionJoiner.add(remainder);
 	}
 	
 	private void drawLine(int lenghtLine) {
@@ -137,10 +135,8 @@ public class OutputDivisionToConsole {
 	}
 
 	private void printSomeSameCharacters(int lenghtLine, String simbol) {
-		//StringJoiner textReverse = new StringJoiner("");
 		for (int i = 0; i < lenghtLine; i++) {
 			outputDivisionJoiner.add(simbol);
 		}
-		//return textReverse.toString();
 	}	
 }

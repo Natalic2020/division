@@ -14,35 +14,34 @@ public class Division {
 
 	public String divideColumn(final int dividend, final int divider) {
 
-		String	aa = "";
+		String	outputResultDivision = "";
 		if (divider == 0) {
             throw new IllegalArgumentException("Error! Сannot be divided by zero");
         }	
-		if (dividend == 0) {
-			
+		if (dividend == 0) {	
 			OutputDivisionToConsole outputDivisionToConsole = new OutputDivisionToConsole(String.valueOf(divider));	
-		     aa = outputDivisionToConsole.drawColumnDivisionToConsoleWhenDividendZerro();
-			 return aa;
+			outputResultDivision = outputDivisionToConsole.drawColumnDivisionToConsoleWhenDividendZerro();
+			 return outputResultDivision;
 		}		
-		Map<String, Object> outputparametersColumnDivision = this.getValueforOutputColumnDivisionToConsole(dividend,
+		Map<String, Object> outputParametersColumnDivision = this.getValueforOutputColumnDivisionToConsole(dividend,
 				divider);
-		OutputDivisionToConsole outputDivisionToConsole = new OutputDivisionToConsole(outputparametersColumnDivision);
-		aa = outputDivisionToConsole.drawColumnDivisionToConsole();
+		OutputDivisionToConsole outputDivisionToConsole = new OutputDivisionToConsole(outputParametersColumnDivision);
+		outputResultDivision = outputDivisionToConsole.drawColumnDivisionToConsole();
 		
-		return aa;
+		return outputResultDivision;
 	}
 
 	private Map<String, Object> getValueforOutputColumnDivisionToConsole(final int dividend, final int divider) { 
 		
-		Map<String, Object> outputparametersColumnDivision = new HashMap<>();
+		Map<String, Object> parametersColumnDivision = new HashMap<>();
 
-		outputparametersColumnDivision.put("dividend", dividend);
-		outputparametersColumnDivision.put("divider", divider);
+		parametersColumnDivision.put("dividend", dividend);
+		parametersColumnDivision.put("divider", divider);
 
 		String[] dividendSplitNumber = String.valueOf(dividend).split(""); 
-		List<String[]> intermediateResultList = new ArrayList<String[]>();
-		StringJoiner resultOfDivision = new StringJoiner("");
-		int remainderOfdivision = 0; // остаток от деления remainder of the division
+		List<String[]> intermediateResultDivisionList = new ArrayList<String[]>();
+		StringJoiner quotient = new StringJoiner("");
+		int remainder = 0; 
 		boolean isNeedNextNumeral = false;
 		StringJoiner currentNumerals = new StringJoiner("");
 		
@@ -51,8 +50,8 @@ public class Division {
 			
 			if (isNeedNextNumeral) {		
 				currentNumerals.add(currentNumeral) ;
-			} else if (remainderOfdivision != 0){
-				currentNumerals.add(String.valueOf(remainderOfdivision) + currentNumeral);
+			} else if (remainder != 0){
+				currentNumerals.add(String.valueOf(remainder) + currentNumeral);
 			}else {
 				currentNumerals.add(currentNumeral);
 			}
@@ -63,23 +62,22 @@ public class Division {
 				isNeedNextNumeral = false;	
 				int currentQuotient = currentNumber / divider;
 				int multiplicationCurrentQuotientUndDivider = currentQuotient * divider;
-				resultOfDivision.add(String.valueOf(currentQuotient));
+				quotient.add(String.valueOf(currentQuotient));
 				String[] currentValueForQuotientUndDivider = { currentNumerals.toString(), String.valueOf(multiplicationCurrentQuotientUndDivider) };
-				intermediateResultList.add(currentValueForQuotientUndDivider);
-				remainderOfdivision = currentNumber - multiplicationCurrentQuotientUndDivider;
+				intermediateResultDivisionList.add(currentValueForQuotientUndDivider);
+				remainder = currentNumber - multiplicationCurrentQuotientUndDivider;
 				currentNumerals = new StringJoiner("");	
 			} else {	
 				isNeedNextNumeral = true;
-				if (!resultOfDivision.toString().isEmpty()){
-					resultOfDivision.add("0");
+				if (!quotient.toString().isEmpty()){
+					quotient.add("0");
 				}
 			}	
 		}
-		outputparametersColumnDivision.put("arrayOfValue", intermediateResultList);
-		outputparametersColumnDivision.put("resultOfDivision", resultOfDivision);
-		outputparametersColumnDivision.put("remainderOfdivision", remainderOfdivision);
+		parametersColumnDivision.put("arrayOfValue", intermediateResultDivisionList);
+		parametersColumnDivision.put("quotient", quotient);
+		parametersColumnDivision.put("remainder", remainder);
 
-		return outputparametersColumnDivision;
+		return parametersColumnDivision;
 	}
 }
-
