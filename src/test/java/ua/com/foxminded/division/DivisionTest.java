@@ -42,7 +42,7 @@ class DivisionTest {
 	}
 
 	@Test
-	void divideColumn_() {
+	void divideColumn_shouldReturnQuotientLengthEqualsDivindendLenght_whenDivindend5NumberDivinder1Number() {
 		final int divindend = 78945;
 		final int divinder = 4;
 		final String expected = 
@@ -65,11 +65,10 @@ class DivisionTest {
 
 		final String actual = division.divideColumn(divindend, divinder);
 		assertEquals(expected, actual);
-
 	}
 
 	@Test
-	void divideColumn_GetRemeinderZerroAfterFirstIterations() {
+	void divideColumn_shouldOutputShiftAfterFirstStep_whenFirstNumberDividentEqualsDivinder() {
 		final int divindend = 78945;
 		final int divinder = 7;
 		final String expected =
@@ -95,7 +94,7 @@ class DivisionTest {
 	}
 
 	@Test
-	void divideColumn_FirstNumberDividerIsLessThanFirstNumberDivider() {
+	void divideColumn_shouldOutputShiftFirstStep_FirstNumberDividerIsLessThanFirstNumberDivider() {
 		final int divindend = 10945;
 		final int divinder = 8;
 		final String expected = //
@@ -118,24 +117,7 @@ class DivisionTest {
 	}
 
 	@Test
-	void divideColumn_HasZerroInTheMiddle() {
-		final int divindend = 45045;
-		final int divinder = 45;
-		final String expected =
-				"  _45045|45\n" + // 
-				"   45   |----\n" + //
-				"   --   |1001\n" + //
-				"    _045\n" + //
-				"      45\n" + //
-				"      --\n" + //
-				"       0";
-
-		final String actual = division.divideColumn(divindend, divinder);
-		assertEquals(expected, actual);
-	}
-
-	@Test
-	void divideColumn_GetRemeinderZerroInTheMiddleOfIterations() {
+	void divideColumn_shouldOutputZerroInQuontient_whenStepNeedTwoDigits() {
 		final int divindend = 4545;
 		final int divinder = 45;
 		final String expected = //
@@ -150,5 +132,38 @@ class DivisionTest {
 		final String actual = division.divideColumn(divindend, divinder);
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	void divideColumn_shouldOutputTwoZerroInQuontient_whenStepNeedThreeDigits() {
+		final int divindend = 453453;
+		final int divinder = 453;
+		final String expected = //
+				"  _453453|453\n" + //
+				"   453   |----\n" + //
+				"   ---   |1001\n" + //
+				"     _453\n" + //
+				"      453\n" + //
+				"      ---\n" + //
+				"        0";//
 
+		final String actual = division.divideColumn(divindend, divinder);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	void divideColumn_shouldOutputTwoZerroInQuontient_whenDivindendHasZerroStepNeedThreeDigits() {
+		final int divindend = 45045;
+		final int divinder = 45;
+		final String expected =
+				"  _45045|45\n" + // 
+				"   45   |----\n" + //
+				"   --   |1001\n" + //
+				"    _045\n" + //
+				"      45\n" + //
+				"      --\n" + //
+				"       0";
+
+		final String actual = division.divideColumn(divindend, divinder);
+		assertEquals(expected, actual);
+	}	
 }
