@@ -61,8 +61,8 @@ public class Division {
 				int currentQuotient = currentNumber / divider;
 				int multiplicationCurrentQuotientUndDivider = currentQuotient * divider;
 				quotient.add(String.valueOf(currentQuotient));
-				String[] currentValueForQuotientUndDivider = { currentNumerals.toString(), String.valueOf(multiplicationCurrentQuotientUndDivider) };
-				stepsDivisionList.add(currentValueForQuotientUndDivider);
+				String[] currentStepDivision = { currentNumerals.toString(), String.valueOf(multiplicationCurrentQuotientUndDivider) };
+				stepsDivisionList.add(currentStepDivision);
 				remainder = currentNumber - multiplicationCurrentQuotientUndDivider;
 				currentNumerals = new StringJoiner("");	
 			} else {	
