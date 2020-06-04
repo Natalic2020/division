@@ -34,16 +34,14 @@ public class Division {
 	private Map<String, Object> getValueforOutputColumnDivisionToConsole(final int dividend, final int divider) { 
 		
 		Map<String, Object> parametersColumnDivision = new HashMap<>();
-
-		parametersColumnDivision.put("dividend", dividend);
-		parametersColumnDivision.put("divider", divider);
-
-		String[] dividendSplitNumber = String.valueOf(dividend).split(""); 
-		List<String[]> intermediateResultDivisionList = new ArrayList<>();
+		List<String[]> stepsDivisionList = new ArrayList<>();
 		StringJoiner quotient = new StringJoiner("");
+		StringJoiner currentNumerals = new StringJoiner("");
+		
+		String[] dividendSplitNumber = String.valueOf(dividend).split(""); 
+		
 		int remainder = 0; 
 		boolean isNeedNextNumeral = false;
-		StringJoiner currentNumerals = new StringJoiner("");
 		
 		for (int i = 0; i < dividendSplitNumber.length; i++) {
 			String currentNumeral = dividendSplitNumber[i]; 
@@ -64,7 +62,7 @@ public class Division {
 				int multiplicationCurrentQuotientUndDivider = currentQuotient * divider;
 				quotient.add(String.valueOf(currentQuotient));
 				String[] currentValueForQuotientUndDivider = { currentNumerals.toString(), String.valueOf(multiplicationCurrentQuotientUndDivider) };
-				intermediateResultDivisionList.add(currentValueForQuotientUndDivider);
+				stepsDivisionList.add(currentValueForQuotientUndDivider);
 				remainder = currentNumber - multiplicationCurrentQuotientUndDivider;
 				currentNumerals = new StringJoiner("");	
 			} else {	
@@ -74,10 +72,12 @@ public class Division {
 				}
 			}	
 		}
-		parametersColumnDivision.put("arrayOfValue", intermediateResultDivisionList);
+		parametersColumnDivision.put("dividend", dividend);
+		parametersColumnDivision.put("divider", divider);
 		parametersColumnDivision.put("quotient", quotient);
 		parametersColumnDivision.put("remainder", remainder);
-
+		parametersColumnDivision.put("stepsDivisionList", stepsDivisionList);
+		
 		return parametersColumnDivision;
 	}
 }
