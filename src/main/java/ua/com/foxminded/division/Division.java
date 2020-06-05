@@ -2,16 +2,12 @@ package ua.com.foxminded.division;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
 
 public class Division {
 
 	private static final String MINUS = "-";
-	private static final String UNDERLINE = "_";
-	private static final String VERTICAL_LINE = "|";
 	private static final String WHITESPASE = " ";
 
 	public void columnDivision(final int dividend, final int divider) {
@@ -24,12 +20,12 @@ public class Division {
 			throw new IllegalArgumentException("Error! Сannot be divided by zero");
 		}
 		if (dividend == 0) {
-			return OutputDivisionToConsoleWhenDividendZerro(divider);
+			return outputDivisionToConsoleWhenDividendZerro(divider);
 		}
-		return OutputDivisionToConsole(dividend, divider);
+		return outputDivisionToConsole(dividend, divider);
 	}
 
-	private String OutputDivisionToConsoleWhenDividendZerro(final int divider) {
+	private String outputDivisionToConsoleWhenDividendZerro(final int divider) {
 		StringJoiner outputDivisionJoiner = new StringJoiner("\n");
 		outputDivisionJoiner.add(String.format("_0|%d", divider));
 		outputDivisionJoiner.add(String.format(" 0|%s", outputLines(String.valueOf(divider).length())));
@@ -37,7 +33,7 @@ public class Division {
 		return outputDivisionJoiner.toString();
 	}
 
-	private String OutputDivisionToConsole(final int dividend, final int divider) {
+	private String outputDivisionToConsole(final int dividend, final int divider) {
 
 		HashMap<String, Object> parametersColunmDivision = getValueforOutputColumnDivisionToConsole(dividend, divider);
 		final List<HashMap<String, String>> stepsDivision = (List<HashMap<String, String>>) parametersColunmDivision
@@ -58,7 +54,7 @@ public class Division {
 
 		String[] dividendSplitNumber = String.valueOf(dividend).split("");
 
-		HashMap<String, Object> parametersColunmDivision = new HashMap<String, Object>();
+		HashMap<String, Object> parametersColunmDivision = new HashMap<>();
 		List<HashMap<String, String>> stepsDivision = new ArrayList<>();
 
 		StringJoiner quotient = new StringJoiner("");
@@ -95,7 +91,7 @@ public class Division {
 
 				if (isFirstStep) {
 				
-					lastSubtrahendLength = String.valueOf(subtrahend);
+					 lastSubtrahendLength = String.valueOf(subtrahend);
 					int shiftFirstDigit = getShiftSubtrahend(minuend, subtrahend);
 					subtrahendHeard = String.format("%s%d", outputWhitespaces(shiftFirstDigit) ,subtrahend);
 					underlineHeard = String.format("%s%s", outputWhitespaces(shiftFirstDigit) , outputLines(String.valueOf(subtrahend).length()));
