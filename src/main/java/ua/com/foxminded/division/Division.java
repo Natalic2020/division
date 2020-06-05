@@ -90,13 +90,11 @@ public class Division {
 				int subtrahend = currentQuotient * divider;
 
 				if (isFirstStep) {
-				
-					 lastSubtrahendLength = String.valueOf(subtrahend);
+					lastSubtrahendLength = String.valueOf(subtrahend);
 					int shiftFirstDigit = getShiftSubtrahend(minuend, subtrahend);
 					subtrahendHeard = String.format("%s%d", outputWhitespaces(shiftFirstDigit) ,subtrahend);
 					underlineHeard = String.format("%s%s", outputWhitespaces(shiftFirstDigit) , outputLines(String.valueOf(subtrahend).length()));
 					currentPositionNumber = currentPositionNumber + shiftFirstDigit;
-
 					isFirstStep = false;
 				} else {
 					if (minuend == subtrahend) {
@@ -117,7 +115,6 @@ public class Division {
 							outputLines(String.valueOf(subtrahend).length())));
 					stepsDivision.add(currentStepDivisionString);
 				}
-
 				quotient.add(String.valueOf(currentQuotient));
 				currentRemainder = minuend - subtrahend;
 				lastSubtrahendLength = String.valueOf(subtrahend);
@@ -129,7 +126,6 @@ public class Division {
 				}
 			}
 		}
-
 		HashMap<String, Object> parametersStepDivisionHead = new HashMap<>();
 		parametersStepDivisionHead.put("dividend", dividend);
 		parametersStepDivisionHead.put("divider", divider);
