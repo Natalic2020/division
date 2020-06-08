@@ -16,7 +16,7 @@ public class Division {
 			throw new IllegalArgumentException("Error! Сannot be divided by zero");
 		}
 		if (dividend == 0) {
-			ResultDivision resultDivision = new ResultDivision(divider);
+			ColumnDivision resultDivision = new ColumnDivision(divider);
 			return resultDivision.getdivisionWhenDividendZerro();
 		}
 		return outputDivisionToConsole(dividend, divider);
@@ -24,8 +24,8 @@ public class Division {
 
 	private String outputDivisionToConsole(final int dividend, final int divider) {
 
-		ResultDivision resultDivision = new ResultDivision(dividend, divider);
-		HashMap<String, Object> parametersColunmDivision = resultDivision.getValueforOutputColumnDivisionToConsole();
+		ColumnDivision columnDivision = new ColumnDivision(dividend, divider);
+		HashMap<String, Object> parametersColunmDivision = columnDivision.prepareResult();
 		final List<HashMap<String, String>> stepsDivision = (List<HashMap<String, String>>) parametersColunmDivision
 				.get("stepsDivision");
 		final String remainder = (String) parametersColunmDivision.get("remainder");

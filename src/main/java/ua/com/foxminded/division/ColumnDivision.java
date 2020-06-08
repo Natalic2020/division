@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class ResultDivision {
+public class ColumnDivision {
 
 	private static final String MINUS = "-";
 	private static final String WHITESPASE = " ";
@@ -23,11 +23,11 @@ public class ResultDivision {
 	final int divider;
 	final int dividend;
 
-	public ResultDivision(final int divider) {
+	public ColumnDivision(final int divider) {
 		this(0,divider); 
 	}
 
-	public ResultDivision(final int dividend, final int divider) {
+	public ColumnDivision(final int dividend, final int divider) {
 		this.divider = divider;
 		this.dividend = dividend;
 	}
@@ -41,6 +41,10 @@ public class ResultDivision {
 	}
 
 	protected HashMap<String, Object> getValueforOutputColumnDivisionToConsole() {
+		return prepareResult();
+	}
+
+	protected HashMap<String, Object> prepareResult() {
 
 		String[] dividendSplitNumber = String.valueOf(dividend).split("");
 		boolean isFirstStep = true;
