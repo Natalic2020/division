@@ -40,6 +40,24 @@ class DivisionTest {
 		final String actual = division.divideColumn(divindend, divinder);
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	void divideColumn_100_4() {
+		final int divindend = 100;
+		final int divinder = 4;
+		final String expected = //
+				"_100|4\n" + 
+				"  8 |--\n" + 
+				"  - |25\n" + 
+				" _20\n" + 
+				"  20\n" + 
+				"  --\n" + 
+				"   0";
+
+		final String actual = division.divideColumn(divindend, divinder);
+		assertEquals(expected, actual);
+	}
+	
 
 	@Test
 	void divideColumn_shouldReturnQuotientLengthEqualsDivindendLenght_whenDivindend5NumberDivinder1Number() {
