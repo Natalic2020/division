@@ -10,28 +10,6 @@ public class ColumnDivision {
 	private static final String MINUS = "-";
 	private static final String WHITESPASE = " ";
 
-	List<HashMap<String, String>> stepsDivision = new ArrayList<>();
-
-	//StringJoiner quotient = new StringJoiner("");
-	//StringJoiner currentNumerals = new StringJoiner("");
-
-	// int currentRemainder = 0;
-
-	//String subtrahendHeard = "";
-	//String underlineHeard = "";
-	
-//	final int divider;
-//	final int dividend;
-
-//	public ColumnDivision(final int divider) {
-//		this(0,divider); 
-//	}
-//
-//	public ColumnDivision(final int dividend, final int divider) {
-//		this.divider = divider;
-//		this.dividend = dividend;
-//	}
-
 	protected String getdivisionWhenDividendZerro(final int divider) {
 		StringJoiner outputDivisionJoiner = new StringJoiner("\n");
 		outputDivisionJoiner.add(String.format("_0|%d", divider));
@@ -43,8 +21,10 @@ public class ColumnDivision {
 	protected HashMap<String, Object> prepareResult(final int dividend, final int divider) {
 
 		char[] dividendSplitNumber = String.valueOf(dividend).toCharArray();
+		List<HashMap<String, String>> stepsDivision = new ArrayList<>();
+		HashMap<String, String> currentStepDivisionString = new HashMap<>();
 		StringJoiner quotient = new StringJoiner("");
-//		boolean isFirstStep = true;
+
 		StringJoiner currentNumerals = new StringJoiner("");
 		String currentRemainder = "";
 		
@@ -54,13 +34,14 @@ public class ColumnDivision {
 			currentNumerals.add(currentRemainder + currentNumeral);
 			currentRemainder = "";
 			Integer minuend = Integer.parseInt(currentNumerals.toString());
-//			HashMap<String, String> headParametres = new HashMap<>();
+
 			if (minuend >= divider) {
 				int digitPosition = i + 1;
 				int currentQuotient = minuend / divider;
 				int subtrahend = currentQuotient * divider;
 			
-				 prepareStepDivision( digitPosition, minuend, dividend, divider, currentNumerals);
+				 currentStepDivisionString = prepareBody(subtrahend, digitPosition, currentNumerals);
+				 stepsDivision.add(currentStepDivisionString);
 				 quotient.add(String.valueOf(currentQuotient));
 				 currentRemainder = receiveCurrentRemainer(minuend, subtrahend);
 				 currentNumerals = new StringJoiner("");
@@ -71,10 +52,8 @@ public class ColumnDivision {
 				}
 			}
 		}
-		HashMap<String, String> headParametres = new HashMap<>();  // remove
-		prepareHead(dividend, divider, headParametres,  quotient);
-		
-		return saveParametersColumnDivision(prepareRemainder(dividend, currentRemainder));
+		prepareHead(dividend, divider,  quotient, stepsDivision);
+		return saveParametersColumnDivision(prepareRemainder(dividend, currentRemainder), stepsDivision);
 	}
 
 	private String receiveCurrentRemainer(Integer minuend, int subtrahend) {
@@ -87,30 +66,7 @@ public class ColumnDivision {
 		return currentRemainder;
 	}
 
-	private void prepareStepDivision( int digitPosition, Integer minuend, final int dividend, final int divider, StringJoiner currentNumerals) {
-		int currentQuotient = minuend / divider;
-    	int subtrahend = currentQuotient * divider;
-	
-		prepareBody(subtrahend, digitPosition, currentNumerals);
-		
-//		quotient.add(String.valueOf(currentQuotient));
-//		currentRemainder = minuend - subtrahend;
-//		currentNumerals = new StringJoiner("");
-		
-	}
-
-//	private 
-//	HashMap<String, String> prepareHeadParametres(final int subtrahend, final int digitPosition, final int dividend) {
-//		String  whiteSpacesToVerticalLine = printCharacters(String.valueOf(dividend).length() - digitPosition, WHITESPASE);
-//		HashMap<String, String> headParametres = new HashMap<>();
-//		String subtrahendHeard = String.format("%s%d%s|", outputWhiteSpacesSubtrahend(digitPosition, subtrahend), subtrahend, whiteSpacesToVerticalLine);
-//		String underlineHeard = String.format("%s%s%s|", outputWhiteSpacesSubtrahend(digitPosition, subtrahend), printCharacters(String.valueOf(subtrahend).length(), MINUS), whiteSpacesToVerticalLine);
-//		headParametres.put("subtrahendHeard", subtrahendHeard);
-//		headParametres.put("underlineHeard", underlineHeard);
-//		return headParametres;
-//	}
-	
-	private void prepareHead(final int dividend, final int divider, HashMap<String, String> headParametres, StringJoiner quotient) {
+	private void prepareHead(final int dividend, final int divider,  final StringJoiner quotient, final List<HashMap<String, String>> stepsDivision) {
 		String subtrahendHeard = stepsDivision.get(0).get("subtrahend");
 		String underlineHeard = stepsDivision.get(0).get("underline");
 		String whiteSpacesToVerticalLine = printCharacters(String.valueOf(dividend).length() - subtrahendHeard.length() + 1, WHITESPASE) ;
@@ -125,7 +81,7 @@ public class ColumnDivision {
 		stepsDivision.add(0, stepDivisionHead);
 	}
 	
-	private void prepareBody(final int subtrahend, final int digitPosition, StringJoiner currentNumerals) {
+	private HashMap<String, String> prepareBody(final int subtrahend, final int digitPosition, final StringJoiner currentNumerals) {
 		HashMap<String, String> currentStepDivisionString = new HashMap<>();
 		currentStepDivisionString.put("minuend",
 				String.format("%s_%s", outputWhiteSpacesMinuend(digitPosition, currentNumerals), currentNumerals));
@@ -133,7 +89,7 @@ public class ColumnDivision {
 				String.format("%s%d", outputWhiteSpacesSubtrahend(digitPosition, subtrahend), subtrahend));
 		currentStepDivisionString.put("underline",
 				String.format("%s%s", outputWhiteSpacesSubtrahend(digitPosition, subtrahend), printCharacters(String.valueOf(subtrahend).length(), MINUS)));
-		stepsDivision.add(currentStepDivisionString);
+		return currentStepDivisionString;
 	}
 
 	private String prepareRemainder(final int dividend, final String currentRemainder) {
@@ -142,14 +98,14 @@ public class ColumnDivision {
 		return String.format("%s %s", whitespacesRemainder, remainder);
 	}
 	
-	private HashMap<String, Object> saveParametersColumnDivision(final String remainder) {
+	private HashMap<String, Object> saveParametersColumnDivision(final String remainder, final List<HashMap<String, String>> stepsDivision) {
 		HashMap<String, Object> parametersColunmDivision = new HashMap<>();
 		parametersColunmDivision.put("stepsDivision", stepsDivision);
 		parametersColunmDivision.put("remainder", remainder);
 		return parametersColunmDivision;
 	}
 
-	private String outputWhiteSpacesMinuend(final int digitPosition, StringJoiner currentNumerals) {
+	private String outputWhiteSpacesMinuend(final int digitPosition, final StringJoiner currentNumerals) {
 		int whiteSpacelength = digitPosition - String.valueOf(currentNumerals).length();
 		return printCharacters(whiteSpacelength, WHITESPASE);
 	}
@@ -159,21 +115,12 @@ public class ColumnDivision {
 		return printCharacters(whiteSpacelength + 1, WHITESPASE);
 	}
 	
-	private String outputLineBetweenDividerAndQuotient(final int divider, StringJoiner quotient) {
+	private String outputLineBetweenDividerAndQuotient(final int divider, final StringJoiner quotient) {
 		if (String.valueOf(divider).length() > quotient.length()) {
 			return printCharacters(String.valueOf(divider).length(), MINUS);
 		}
 		return printCharacters(quotient.length(), MINUS);
 	}
-	
-//	private String receiveCurrentNumerals(final char currentNumeral, int currentRemainder ) {
-//		if (currentRemainder != 0) {
-//			//currentRemainder = 0;
-//			return String.valueOf(currentRemainder) + String.valueOf(currentNumeral);
-//		} else {
-//			return String.valueOf(currentNumeral);
-//		}
-//	}
 
 	private String printCharacters(final int lenghtLine, final String simbol) {
 		StringJoiner outputSymbol = new StringJoiner("");
