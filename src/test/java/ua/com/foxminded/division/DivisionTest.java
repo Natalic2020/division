@@ -33,8 +33,8 @@ class DivisionTest {
 		final int divindend = 0;
 		final int divinder = 158;
 		final String expected = //
-				"_0|158\n" + //
-				" 0|---\n" + //
+				"_0|158\r\n" + //
+				" 0|---\r\n" + //
 				"  |0";
 
 		final String actual = division.divideColumn(divindend, divinder);
@@ -46,12 +46,12 @@ class DivisionTest {
 		final int divindend = 100;
 		final int divinder = 4;
 		final String expected = //
-				"_100|4\n" + 
-				"  8 |--\n" + 
-				"  - |25\n" + 
-				" _20\n" + 
-				"  20\n" + 
-				"  --\n" + 
+				"_100|4\r\n" + 
+				"  8 |--\r\n" + 
+				"  - |25\r\n" + 
+				" _20\r\n" + 
+				"  20\r\n" + 
+				"  --\r\n" + 
 				"   0";
 
 		final String actual = division.divideColumn(divindend, divinder);
@@ -64,21 +64,21 @@ class DivisionTest {
 		final int divindend = 78945;
 		final int divinder = 4;
 		final String expected = 
-				"_78945|4\n" + // 
-				" 4    |-----\n" + // 
-				" -    |19736\n" + //
-				"_38\n" + //
-				" 36\n" + //
-				" --\n" + //
-				" _29\n" + //
-				"  28\n" + //
-				"  --\n" + //
-				"  _14\n" + //
-				"   12\n" + //
-				"   --\n" + //
-				"   _25\n" + //
-				"    24\n" + //
-				"    --\n" + //
+				"_78945|4\r\n" + // 
+				" 4    |-----\r\n" + // 
+				" -    |19736\r\n" + //
+				"_38\r\n" + //
+				" 36\r\n" + //
+				" --\r\n" + //
+				" _29\r\n" + //
+				"  28\r\n" + //
+				"  --\r\n" + //
+				"  _14\r\n" + //
+				"   12\r\n" + //
+				"   --\r\n" + //
+				"   _25\r\n" + //
+				"    24\r\n" + //
+				"    --\r\n" + //
 				"     1";
 
 		final String actual = division.divideColumn(divindend, divinder);
@@ -90,21 +90,21 @@ class DivisionTest {
 		final int divindend = 78945;
 		final int divinder = 7;
 		final String expected =
-				"_78945|7\n" + // 
-				" 7    |-----\n" + // 
-				" -    |11277\n" + //
-				" _8\n" + //
-				"  7\n" + //
-				"  -\n" + //
-				" _19\n" + //
-				"  14\n" + //
-				"  --\n" + //
-				"  _54\n" + //
-				"   49\n" + //
-				"   --\n" + //
-				"   _55\n" + //
-				"    49\n" + //
-				"    --\n" + //
+				"_78945|7\r\n" + // 
+				" 7    |-----\r\n" + // 
+				" -    |11277\r\n" + //
+				" _8\r\n" + //
+				"  7\r\n" + //
+				"  -\r\n" + //
+				" _19\r\n" + //
+				"  14\r\n" + //
+				"  --\r\n" + //
+				"  _54\r\n" + //
+				"   49\r\n" + //
+				"   --\r\n" + //
+				"   _55\r\n" + //
+				"    49\r\n" + //
+				"    --\r\n" + //
 				"     6";
 
 		final String actual = division.divideColumn(divindend, divinder);
@@ -116,18 +116,18 @@ class DivisionTest {
 		final int divindend = 10945;
 		final int divinder = 8;
 		final String expected = //
-				"_10945|8\n" + //
-				"  8   |----\n" + // 
-				"  -   |1368\n" + //
-				" _29\n" + //
-				"  24\n" + //
-				"  --\n" + //
-				"  _54\n" + //
-				"   48\n" + //
-				"   --\n" + //
-				"   _65\n" + //
-				"    64\n" + //
-				"    --\n" + //
+				"_10945|8\r\n" + //
+				"  8   |----\r\n" + // 
+				"  -   |1368\r\n" + //
+				" _29\r\n" + //
+				"  24\r\n" + //
+				"  --\r\n" + //
+				"  _54\r\n" + //
+				"   48\r\n" + //
+				"   --\r\n" + //
+				"   _65\r\n" + //
+				"    64\r\n" + //
+				"    --\r\n" + //
 				"     1"; //
 
 		final String actual = division.divideColumn(divindend, divinder);
@@ -139,12 +139,12 @@ class DivisionTest {
 		final int divindend = 4545;
 		final int divinder = 45;
 		final String expected = //
-				"_4545|45\n" + //
-				" 45  |---\n" + //
-				" --  |101\n" + //
-				"  _45\n" + //
-				"   45\n" + //
-				"   --\n" + //
+				"_4545|45\r\n" + //
+				" 45  |---\r\n" + //
+				" --  |101\r\n" + //
+				"  _45\r\n" + //
+				"   45\r\n" + //
+				"   --\r\n" + //
 				"    0";//
 
 		final String actual = division.divideColumn(divindend, divinder);
@@ -156,12 +156,12 @@ class DivisionTest {
 		final int divindend = 453453;
 		final int divinder = 453;
 		final String expected = //
-				"_453453|453\n" + //
-				" 453   |----\n" + //
-				" ---   |1001\n" + //
-				"   _453\n" + //
-				"    453\n" + //
-				"    ---\n" + //
+				"_453453|453\r\n" + //
+				" 453   |----\r\n" + //
+				" ---   |1001\r\n" + //
+				"   _453\r\n" + //
+				"    453\r\n" + //
+				"    ---\r\n" + //
 				"      0";//
 
 		final String actual = division.divideColumn(divindend, divinder);
@@ -173,15 +173,17 @@ class DivisionTest {
 		final int divindend = 45045;
 		final int divinder = 45;
 		final String expected =
-				"_45045|45\n" + // 
-				" 45   |----\n" + //
-				" --   |1001\n" + //
-				"  _045\n" + //
-				"    45\n" + //
-				"    --\n" + //
+				"_45045|45\r\n" + // 
+				" 45   |----\r\n" + //
+				" --   |1001\r\n" + //
+				"  _045\r\n" + //
+				"    45\r\n" + //
+				"    --\r\n" + //
 				"     0";
 
 		final String actual = division.divideColumn(divindend, divinder);
 		assertEquals(expected, actual);
 	}	
+	
+	
 }

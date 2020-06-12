@@ -11,9 +11,9 @@ public class ColumnDivision {
 	private static final String WHITESPASE = " ";
 
 	protected String getdivisionWhenDividendZerro(final int divider) {
-		StringJoiner outputDivisionJoiner = new StringJoiner("\n");
-		outputDivisionJoiner.add(String.format("_0|%d", divider));
-		outputDivisionJoiner.add(String.format(" 0|%s", printCharacters(String.valueOf(divider).length(), MINUS)));
+		StringJoiner outputDivisionJoiner = new StringJoiner("");
+		outputDivisionJoiner.add(String.format("_0|%d%n", divider));
+		outputDivisionJoiner.add(String.format(" 0|%s%n", printCharacters(String.valueOf(divider).length(), MINUS)));
 		outputDivisionJoiner.add("  |0");
 		return outputDivisionJoiner.toString();
 	}
@@ -67,28 +67,28 @@ public class ColumnDivision {
 	}
 
 	private void prepareHead(final int dividend, final int divider,  final StringJoiner quotient, final List<HashMap<String, String>> stepsDivision) {
-		String subtrahendHeard = stepsDivision.get(0).get("subtrahend");
-		String underlineHeard = stepsDivision.get(0).get("underline");
+		String subtrahendHeard = stepsDivision.get(0).get("subtrahend").replaceAll("\n|\r\n", "");
+		String underlineHeard = stepsDivision.get(0).get("underline").replaceAll("\n|\r\n", "");
 		String whiteSpacesToVerticalLine = printCharacters(String.valueOf(dividend).length() - subtrahendHeard.length() + 1, WHITESPASE) ;
 		String lineBetweenDividerAndQuotient = outputLineBetweenDividerAndQuotient(divider, quotient);
 		
 		stepsDivision.remove(0);
 		HashMap<String, String> stepDivisionHead = new HashMap<>();
 		
-		stepDivisionHead.put("minuend", String.format("_%d|%d", dividend, divider));
-		stepDivisionHead.put("subtrahend", String.format("%s%s|%s", subtrahendHeard, whiteSpacesToVerticalLine, lineBetweenDividerAndQuotient));
-		stepDivisionHead.put("underline", String.format("%s%s|%s", underlineHeard, whiteSpacesToVerticalLine, quotient));
+		stepDivisionHead.put("minuend", String.format("_%d|%d%n", dividend, divider));
+		stepDivisionHead.put("subtrahend", String.format("%s%s|%s%n", subtrahendHeard, whiteSpacesToVerticalLine, lineBetweenDividerAndQuotient));
+		stepDivisionHead.put("underline", String.format("%s%s|%s%n", underlineHeard, whiteSpacesToVerticalLine, quotient));
 		stepsDivision.add(0, stepDivisionHead);
 	}
 	
 	private HashMap<String, String> prepareBody(final int subtrahend, final int digitPosition, final StringJoiner currentNumerals) {
 		HashMap<String, String> currentStepDivisionString = new HashMap<>();
 		currentStepDivisionString.put("minuend",
-				String.format("%s_%s", outputWhiteSpacesMinuend(digitPosition, currentNumerals), currentNumerals));
+				String.format("%s_%s%n", outputWhiteSpacesMinuend(digitPosition, currentNumerals), currentNumerals));
 		currentStepDivisionString.put("subtrahend",
-				String.format("%s%d", outputWhiteSpacesSubtrahend(digitPosition, subtrahend), subtrahend));
+				String.format("%s%d%n", outputWhiteSpacesSubtrahend(digitPosition, subtrahend), subtrahend));
 		currentStepDivisionString.put("underline",
-				String.format("%s%s", outputWhiteSpacesSubtrahend(digitPosition, subtrahend), printCharacters(String.valueOf(subtrahend).length(), MINUS)));
+				String.format("%s%s%n", outputWhiteSpacesSubtrahend(digitPosition, subtrahend), printCharacters(String.valueOf(subtrahend).length(), MINUS)));
 		return currentStepDivisionString;
 	}
 

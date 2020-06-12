@@ -30,7 +30,7 @@ public class Division {
 				.get("stepsDivision");
 		final String remainder = (String) parametersColunmDivision.get("remainder");
 
-		StringJoiner outputDivisionJoiner = new StringJoiner("\n");
+		StringJoiner outputDivisionJoiner = new StringJoiner("");
 		for (HashMap<String, String> stepDivision : stepsDivision) {
 			outputDivisionJoiner.add(stepDivision.get("minuend"));
 			outputDivisionJoiner.add(stepDivision.get("subtrahend"));
