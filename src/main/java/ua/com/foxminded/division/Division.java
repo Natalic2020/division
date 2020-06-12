@@ -16,16 +16,16 @@ public class Division {
 			throw new IllegalArgumentException("Error! Сannot be divided by zero");
 		}
 		if (dividend == 0) {
-			ColumnDivision resultDivision = new ColumnDivision(divider);
-			return resultDivision.getdivisionWhenDividendZerro();
+			ColumnDivision resultDivision = new ColumnDivision();
+			return resultDivision.getdivisionWhenDividendZerro(divider);
 		}
 		return outputDivisionToConsole(dividend, divider);
 	}
 
 	private String outputDivisionToConsole(final int dividend, final int divider) {
 
-		ColumnDivision columnDivision = new ColumnDivision(dividend, divider);
-		HashMap<String, Object> parametersColunmDivision = columnDivision.prepareResult();
+		ColumnDivision columnDivision = new ColumnDivision();
+		HashMap<String, Object> parametersColunmDivision = columnDivision.prepareResult(dividend, divider);
 		final List<HashMap<String, String>> stepsDivision = (List<HashMap<String, String>>) parametersColunmDivision
 				.get("stepsDivision");
 		final String remainder = (String) parametersColunmDivision.get("remainder");
