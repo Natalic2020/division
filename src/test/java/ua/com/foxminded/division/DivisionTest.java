@@ -14,7 +14,7 @@ class DivisionTest {
 		final int divinder = 0;
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			division.divideColumn(divindend, divinder);
+			division.columnDivision(divindend, divinder);
 		});
 	}
 
@@ -24,7 +24,7 @@ class DivisionTest {
 		final int divinder = 0;
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			division.divideColumn(divindend, divinder);
+			division.columnDivision(divindend, divinder);
 		});
 	}
 
@@ -32,12 +32,13 @@ class DivisionTest {
 	void divideColumn_shouldReturnZerro_whenInputDivinderNoZerroAndDividendZerro() {
 		final int divindend = 0;
 		final int divinder = 158;
-		final String expected = String.format("%s%n%s%n%s", //
-				"_0|158" , //
+		final String expected = String.format("%s%n%s%n%s%n%s", //
+				"_0|158", // 
 				" 0|---", //
-				"  |0");
+				" -|0", // 
+				" 0");
 
-		   final String actual = division.divideColumn(divindend, divinder);
+		   final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}	
 	
@@ -54,7 +55,7 @@ class DivisionTest {
 				"  --", // 
 				"   0");
 
-		final String actual = division.divideColumn(divindend, divinder);
+		final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}
 	
@@ -81,7 +82,7 @@ class DivisionTest {
 				"    --",  //
 				"     1");
 
-		final String actual = division.divideColumn(divindend, divinder);
+		final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}
 
@@ -107,7 +108,7 @@ class DivisionTest {
 				"    --",  //
 				"     6" );
 
-		final String actual = division.divideColumn(divindend, divinder);
+		final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}
 
@@ -130,7 +131,7 @@ class DivisionTest {
 				"    --",  //
 				"     1"); //
 
-		final String actual = division.divideColumn(divindend, divinder);
+		final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}
 
@@ -147,7 +148,7 @@ class DivisionTest {
 				"   --",//
 				"    0");//
 
-		final String actual = division.divideColumn(divindend, divinder);
+		final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}
 	
@@ -164,7 +165,7 @@ class DivisionTest {
 				"    ---",//
 				"      0");//
 
-		final String actual = division.divideColumn(divindend, divinder);
+		final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}
 	
@@ -181,7 +182,7 @@ class DivisionTest {
 				"    --",//
 				"     0");
 
-		final String actual = division.divideColumn(divindend, divinder);
+		final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}		
 }
