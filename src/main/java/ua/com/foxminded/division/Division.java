@@ -7,8 +7,8 @@ import java.util.StringJoiner;
 
 public class Division {
 
-	private static final String MINUS = "-";
-	private static final String WHITESPASE = " ";
+	private static final String UNDERSCORE_SIGN = "-";
+	private static final String SINGLE_INDENT = " ";
 
 	public String columnDivision(final int dividend, final int divider) {
 		return divideColumn(Math.abs(dividend), Math.abs(divider));
@@ -90,7 +90,7 @@ public class Division {
 			stepsDivision.remove(0);
 		}
 		String whiteSpacesToVerticalLine = printCharacters(
-				String.valueOf(dividend).length() - subtrahendHeard.length() + 1, WHITESPASE);
+				String.valueOf(dividend).length() - subtrahendHeard.length() + 1, SINGLE_INDENT);
 		String lineBetweenDividerAndQuotient = outputLineBetweenDividerAndQuotient(divider, quotient);
 		HashMap<String, String> stepDivisionHead = new HashMap<>();
 
@@ -110,13 +110,13 @@ public class Division {
 				String.format("%s %d%n", outputWhiteSpaces(digitPosition, subtrahend), subtrahend));
 		currentStepDivisionString.put("underline",
 				String.format("%s %s%n", outputWhiteSpaces(digitPosition, subtrahend),
-						printCharacters(String.valueOf(subtrahend).length(), MINUS)));
+						printCharacters(String.valueOf(subtrahend).length(), UNDERSCORE_SIGN)));
 		return currentStepDivisionString;
 	}
 
 	private String prepareRemainder(final int dividend, final int remainder) {
 		String whitespacesRemainder = printCharacters(
-				String.valueOf(dividend).length() - String.valueOf(remainder).length(), WHITESPASE);
+				String.valueOf(dividend).length() - String.valueOf(remainder).length(), SINGLE_INDENT);
 		return String.format("%s %d", whitespacesRemainder, remainder);
 	}
 
@@ -130,14 +130,14 @@ public class Division {
 
 	private String outputWhiteSpaces(final int digitPosition, final int number) {
 		int whiteSpacelength = digitPosition - String.valueOf(number).length();
-		return printCharacters(whiteSpacelength, WHITESPASE);
+		return printCharacters(whiteSpacelength, SINGLE_INDENT);
 	}
 
 	private String outputLineBetweenDividerAndQuotient(final int divider, final StringJoiner quotient) {
 		if (String.valueOf(divider).length() > quotient.length()) {
-			return printCharacters(String.valueOf(divider).length(), MINUS);
+			return printCharacters(String.valueOf(divider).length(), UNDERSCORE_SIGN);
 		}
-		return printCharacters(quotient.length(), MINUS);
+		return printCharacters(quotient.length(), UNDERSCORE_SIGN);
 	}
 
 	private String printCharacters(final int lenghtLine, final String simbol) {

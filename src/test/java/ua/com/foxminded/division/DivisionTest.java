@@ -43,7 +43,7 @@ class DivisionTest {
 	}	
 	
 	@Test
-	void divideColumn_100_4() {
+	void divideColumn_shouldOnlySingleIndentBody_whenDivindendHat2ZerroAtTheEnd() {
 		final int divindend = 100;
 		final int divinder = 4;
 		final String expected = String.format("%s%n%s%n%s%n%s%n%s%n%s%n%s", //
@@ -58,7 +58,6 @@ class DivisionTest {
 		final String actual = division.columnDivision(divindend, divinder);
 		assertEquals(expected, actual);
 	}
-	
 
 	@Test
 	void divideColumn_shouldReturnQuotientLengthEqualsDivindendLenght_whenDivindend5NumberDivinder1Number() {
